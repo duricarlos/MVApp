@@ -6,8 +6,8 @@ import "../../map.css";
 export default function Map({ locations }: { locations?: any[] }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-80.8749439);
-  const [lat, setLat] = useState(35.2214744);
+  const [lng] = useState(-80.8749439);
+  const [lat] = useState(35.2214744);
   const [zoom] = useState(14);
   const [API_KEY] = useState("2oGDT5BjbYZQmRFvHaL1");
 
