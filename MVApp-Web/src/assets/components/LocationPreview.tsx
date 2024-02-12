@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-
 import { Loc } from "../../type.d";
 import { Link } from "react-router-dom";
 
-import { CONSTS } from '../../utils/const'
 
 
 export default function LocationPreview({ locations }: { locations: Loc[]}) {
