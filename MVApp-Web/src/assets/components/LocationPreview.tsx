@@ -6,18 +6,9 @@ import { Link } from "react-router-dom";
 import { CONSTS } from '../../utils/const'
 
 
-export default function LocationPreview() {
+export default function LocationPreview({ locations }: { locations: Loc[]}) {
   //locations is an array of objects of type Location
-  const [locations, setLocations] = useState<Loc[]>([]);
 
-  useEffect(() => {
-    const apiUrl = `${CONSTS.apiUrl}locations/`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((repos) => {
-        setLocations(repos);
-      });
-  }, []);
   return (
       <ul role="list" className="divide-y divide-gray-100">
         {locations.map((item) => (
