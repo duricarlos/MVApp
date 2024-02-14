@@ -1,5 +1,5 @@
-import Header from "./assets/components/Header";
-import LocationForm from "./assets/components/LocationForm";
+import Header from "../assets/components/Header";
+import LocationForm from "../assets/components/LocationForm";
 
 
 export default function FormPage({type} : {type: string}) {

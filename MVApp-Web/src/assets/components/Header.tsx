@@ -13,7 +13,8 @@ import logo from '../../assets/img/logo.png'
 // }
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Add', href: '/add', current: true }
+  { name: 'Add', href: '/add', current: true },
+  { name: 'Report', href: '/report', current: true }
 ]
 // const userNavigation = [
 //   { name: 'Your Profile', href: '#' },

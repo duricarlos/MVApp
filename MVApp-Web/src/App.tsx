@@ -1,9 +1,10 @@
 
 import { Route, Routes } from 'react-router-dom'
-import HomePage from './HomePage'
-import LocationPage from './LocationPage'
+import HomePage from './pages/HomePage'
+import LocationPage from './pages/LocationPage'
+import Report from './pages/Report'
 // import FormPage from './assets/components/LocationForm'
-import FormPage from './FormPage'
+import FormPage from './pages/FormPage'
 
 import { CONSTS } from './utils/const'
 
@@ -25,6 +26,7 @@ export default function Example() {
           <Route path="/add" element={<FormPage type='add'/>} />
           <Route path="/edit/:locationId" element={<FormPage type='edit'/>} />
           <Route path="/del/:locationId" element={<FormPage type='del'/>} />
+          <Route path="/report" element={<Report />} />
 
     </Routes>
   )

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Header from "./assets/components/Header";
+import Header from "../assets/components/Header";
 
-import { Loc } from "./type.d";
-import LocationInfo from "./assets/components/LocationInfo";
+import { Loc } from "../type.d";
+import LocationInfo from "../assets/components/LocationInfo";
 
-import { CONSTS } from './utils/const'
+import { CONSTS } from '../utils/const'
 
 
 export default function LocationPage() {

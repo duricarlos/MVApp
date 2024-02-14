@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from 'react';
-import Header from './assets/components/Header'
-import LocationPreview from './assets/components/LocationPreview'
-import Map from './assets/components/Map'
-import { CONSTS } from './utils/const';
-import { Loc } from './type.d';
+import Header from '../assets/components/Header'
+import LocationPreview from '../assets/components/LocationPreview'
+import Map from '../assets/components/Map'
+import { CONSTS } from '../utils/const';
+import { Loc } from '../type.d';
 
 export default function Home() {
   const [locations, setLocations] = useState<Loc[]>([]);
