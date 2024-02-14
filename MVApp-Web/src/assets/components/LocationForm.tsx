@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CONSTS } from '../../utils/const'
+import { HexColorPicker } from "react-colorful";
 
 function getLocationHandleClick({setNotificacionData}: {setNotificacionData: any}) {
   setNotificacionData({
@@ -25,47 +26,7 @@ function getLocationHandleClick({setNotificacionData}: {setNotificacionData: any
 }
 
 
-function sendFormHandleClick({ type, setNotificacionData }: { type: string, setNotificacionData: any }) {
-  const Name = (document.getElementById("Name") as HTMLInputElement).value;
-  const id = (document.getElementById("id") as HTMLInputElement).value;
-  const Lat = (document.getElementById("Lat") as HTMLInputElement).value;
-  const Lng = (document.getElementById("Lng") as HTMLInputElement).value;
-  const Notes = (document.getElementById("Notes") as HTMLInputElement).value;
-  const data = { Name, Lat, Lng, Notes };
 
-  const methodType =
-    type === "add" ? "POST" : type === "edit" ? "PUT" : "DELETE";
-  const url =
-    type === "add"
-      ? `${CONSTS.apiUrl}locations/`
-      : type === "edit"
-      ? `${CONSTS.apiUrl}locations/${id}`
-      : `${CONSTS.apiUrl}locations/${id}`;
-  console.log(data);
-  console.log(url);
-  fetch(url, {
-    method: methodType,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-      setNotificacionData({
-        message: data.message,
-        styles: notificationStyles.success,
-      })
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      setNotificacionData({
-        message: error.message,
-        styles: notificationStyles.error,
-      })
-    });
-}
 
 
 const notificationStyles = {
@@ -79,6 +40,49 @@ export default function LocationForm({ type }: { type: string }) {
     message: "",
     styles: "",
   });
+  const [color, setColor] = useState("#aabbcc");
+
+  function sendFormHandleClick({ type, setNotificacionData }: { type: string, setNotificacionData: any }) {
+    const Name = (document.getElementById("Name") as HTMLInputElement).value;
+    const id = (document.getElementById("id") as HTMLInputElement).value;
+    const Lat = (document.getElementById("Lat") as HTMLInputElement).value;
+    const Lng = (document.getElementById("Lng") as HTMLInputElement).value;
+    const Notes = (document.getElementById("Notes") as HTMLInputElement).value;
+    const data = { Name, Lat, Lng, Notes, Color: color };
+  
+    const methodType =
+      type === "add" ? "POST" : type === "edit" ? "PUT" : "DELETE";
+    const url =
+      type === "add"
+        ? `${CONSTS.apiUrl}locations/`
+        : type === "edit"
+        ? `${CONSTS.apiUrl}locations/${id}`
+        : `${CONSTS.apiUrl}locations/${id}`;
+    console.log(data);
+    console.log(url);
+    fetch(url, {
+      method: methodType,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setNotificacionData({
+          message: data.message,
+          styles: notificationStyles.success,
+        })
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setNotificacionData({
+          message: error.message,
+          styles: notificationStyles.error,
+        })
+      });
+  }
   
 
   const title =
@@ -107,6 +111,7 @@ export default function LocationForm({ type }: { type: string }) {
               data.data.Lng;
             (document.getElementById("Notes") as HTMLInputElement).value =
               data.data.Notes;
+            setColor(data.data.Color);
               setNotificacionData({
                 message: "Location found",
                 styles: notificationStyles.success,
@@ -227,6 +232,29 @@ export default function LocationForm({ type }: { type: string }) {
                   className="block resize w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+            </div>
+            <div className="sm:col-span-3 sm:items-center justify-center w-full">
+              <HexColorPicker color={color} onChange={setColor} />
+              {/* checkboxs with the multiple default colors */}
+
+              <div className="flex items-center w-full pt-5">
+                <input
+                  id="color"
+                  name="color"
+                  type="color"
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  className="rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                <label
+                  htmlFor="color"
+                  className="ml-2 block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Color
+                </label>
+              </div>
+
+              
             </div>
           </div>
         </div>

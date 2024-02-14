@@ -17,6 +17,7 @@ export default function LocationPage() {
     Lat: 0,
     Lng: 0,
     Notes: "loading...",
+    sells: [],
   };
   const [location, setLocation] = useState<Loc>(defaultLocation);
 
@@ -28,6 +29,7 @@ export default function LocationPage() {
         //check if repos status is 200
 
         if (repos.status === 200) {
+          console.log(repos.data);
           setLocation(repos.data);
         } else {
           console.log(repos);

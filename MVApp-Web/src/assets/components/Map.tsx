@@ -28,12 +28,12 @@ export default function Map({ locations }: { locations?: any[] }) {
     locations.forEach((loc, index) => {
       // @ts-ignore
       index === 0 ? map.current.flyTo({ center: [loc.Lng, loc.Lat] }) : null;
-      new maplibregl.Marker({ color: "#FF0000" })
+      new maplibregl.Marker({ color: loc.Color })
         .setLngLat([loc.Lng, loc.Lat])
         .setPopup(
           new maplibregl.Popup().setHTML(
             // Name, Notes, ID, link to open Google Maps
-            `<h3>${loc.Name}</h3><p>${loc.Notes}</p><a href="https://www.google.com/maps/search/?api=1&query=${loc.Lat},${loc.Lng}" target="_blank">Abrir en Google Maps</a>`
+            `<h3>${loc.id}. ${loc.Name}</h3><p>${loc.Notes}</p><a href="https://mvapp.carlosduri.com/location/${loc.id}">Abrir</a>`
           )
         )
         // @ts-ignore
