@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import Header from "../assets/components/Header";
 
 import { Loc } from "../type.d";
-import LocationInfo from "../assets/components/LocationInfo";
 import Map from "../assets/components/Map";
 
 import { CONSTS } from "../utils/const";
@@ -28,7 +26,9 @@ function formatDate(date: string) {
 }
 
 export default function Report() {
-  const [date, setDate] = useState(new Date());
+    //new date today
+    const [date, setDate] = useState(new Date());
+//   const [date, setDate] = useState(new Date());
   const [locations, setLocations] = useState<Loc[]>([]);
   const [sells, setSells] = useState<any[]>([]);
 
@@ -37,13 +37,16 @@ export default function Report() {
     const apiUrl = `${CONSTS.apiUrl}report/?date=${
       date.toISOString().split("T")[0]
     }`;
+    console.log(apiUrl);
     fetch(apiUrl)
       .then((res) => res.json())
       .then((repos: any) => {
+        console.log(repos);
         //repos is an array of sells
         setSells(repos.data);
 
         Object.entries(repos.data).forEach((element: any) => {
+            console.log(element[1].location);
           //check if locations has the location (element[1].location)
           // if not, add it
           let location = locations.find(
@@ -111,7 +114,7 @@ export default function Report() {
               <section>
                 {/* current date */}
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-                  {date.toLocaleDateString()}
+                  {date.toISOString().split("T")[0]}
                 </h1>
               </section>
               <section
